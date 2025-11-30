@@ -11,7 +11,7 @@ class UserLoginUseCase implements UseCase<User, UserLoginParams> {
 
   @override
   Future<Either<Failure, User>> call(UserLoginParams params) async {
-    return authRepository.loginWithEmailPassword(
+    return await authRepository.loginWithEmailPassword(
       email: params.email,
       password: params.password,
     );
