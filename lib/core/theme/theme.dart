@@ -8,6 +8,10 @@ class AppTheme {
   );
 
   static final darkThemeMode = ThemeData.dark().copyWith(
+    chipTheme: ChipThemeData(
+      color: WidgetStatePropertyAll(AppPallete.backgroundColor),
+      side: BorderSide.none
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: AppPallete.backgroundColor,
     ),
