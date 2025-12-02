@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:blog_app/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:blog_app/core/common/widgets/loader.dart';
+import 'package:blog_app/core/constants/constants.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/utils/pick_image.dart';
 import 'package:blog_app/core/utils/show_snackbar.dart';
@@ -135,42 +136,36 @@ class _AddNewBlogState extends State<AddNewBlog> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children:
-                            [
-                                  "Technology",
-                                  "Business",
-                                  "Programming",
-                                  "Entertainment",
-                                ]
-                                .map(
-                                  (e) => Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        if (selectedTopics.contains(e)) {
-                                          selectedTopics.remove(e);
-                                        } else {
-                                          selectedTopics.add(e);
-                                        }
-                                        setState(() {});
-                                      },
-                                      child: Chip(
-                                        label: Text(e),
-                                        color: selectedTopics.contains(e)
-                                            ? const WidgetStatePropertyAll(
-                                                AppPallete.gradient1,
-                                              )
-                                            : null,
-                                        side: selectedTopics.contains(e)
-                                            ? null
-                                            : BorderSide(
-                                                color: AppPallete.borderColor,
-                                              ),
-                                      ),
-                                    ),
+                        children: Constants.topics
+                            .map(
+                              (e) => Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    if (selectedTopics.contains(e)) {
+                                      selectedTopics.remove(e);
+                                    } else {
+                                      selectedTopics.add(e);
+                                    }
+                                    setState(() {});
+                                  },
+                                  child: Chip(
+                                    label: Text(e),
+                                    color: selectedTopics.contains(e)
+                                        ? const WidgetStatePropertyAll(
+                                            AppPallete.gradient1,
+                                          )
+                                        : null,
+                                    side: selectedTopics.contains(e)
+                                        ? null
+                                        : BorderSide(
+                                            color: AppPallete.borderColor,
+                                          ),
                                   ),
-                                )
-                                .toList(),
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ),
                     BlogEditor(
