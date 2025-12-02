@@ -12,8 +12,10 @@ import 'package:blog_app/features/blog/domain/usecases/get_all_blogs.dart';
 import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart';
 import 'package:blog_app/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'core/network/connection_checker.dart';
 import 'core/secrets/app_secrets.dart';
 import 'features/auth/data/repository/auth_repository_impl.dart';
 
@@ -30,6 +32,12 @@ Future<void> initDependencies() async {
 
   // core
   serviceLocator.registerLazySingleton(() => AppUserCubit());
+
+  serviceLocator.registerFactory(() => InternetConnection());
+
+  serviceLocator.registerFactory<ConnectionChecker>(
+    () => ConnectionCheckerImpl(internetConnection: serviceLocator()),
+  );
 }
 
 void _initAuth() {
@@ -38,7 +46,7 @@ void _initAuth() {
   );
 
   serviceLocator.registerFactory<AuthRepository>(
-    () => AuthRepositoryImpl(serviceLocator()),
+    () => AuthRepositoryImpl(serviceLocator(), serviceLocator()),
   );
 
   serviceLocator.registerFactory(() => UserSignUpUseCase(serviceLocator()));
