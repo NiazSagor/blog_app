@@ -88,26 +88,26 @@ class _AddNewBlogState extends State<AddNewBlog> {
             return Loader();
           }
           return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    image != null
-                        ? GestureDetector(
-                            onTap: selectImage,
-                            child: SizedBox(
-                              height: 150,
-                              width: double.infinity,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.file(image!, fit: BoxFit.cover),
-                              ),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  image != null
+                      ? GestureDetector(
+                          onTap: selectImage,
+                          child: SizedBox(
+                            height: 150,
+                            width: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(image!, fit: BoxFit.cover),
                             ),
-                          )
-                        : GestureDetector(
-                            onTap: selectImage,
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: selectImage,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: DottedBorder(
                               options: RoundedRectDottedBorderOptions(
                                 color: AppPallete.borderColor,
@@ -132,9 +132,12 @@ class _AddNewBlogState extends State<AddNewBlog> {
                               ),
                             ),
                           ),
-                    SizedBox(height: 20),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
+                        ),
+                  SizedBox(height: 15),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 11),
                       child: Row(
                         children: Constants.topics
                             .map(
@@ -168,17 +171,24 @@ class _AddNewBlogState extends State<AddNewBlog> {
                             .toList(),
                       ),
                     ),
-                    BlogEditor(
+                  ),
+                  SizedBox(height: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: BlogEditor(
                       textEditingController: textEditingController,
                       hintText: "Blog Title",
                     ),
-                    SizedBox(height: 10),
-                    BlogEditor(
+                  ),
+                  SizedBox(height: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: BlogEditor(
                       textEditingController: contentController,
                       hintText: "Blog Content",
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );

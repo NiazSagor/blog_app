@@ -15,7 +15,6 @@ class BlogCard extends StatelessWidget {
       onTap: () => Navigator.push(context, BlogViewerPage.route(blog)),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-        padding: const EdgeInsets.all(16),
         height: 200,
         decoration: BoxDecoration(
           color: color,
@@ -28,27 +27,36 @@ class BlogCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: blog.topics
-                        .map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Chip(label: Text(e)),
-                          ),
-                        )
-                        .toList(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(11, 16, 16, 0),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: blog.topics
+                          .map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Chip(label: Text(e)),
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
                 ),
-                Text(
-                  blog.title,
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    blog.title,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
 
-            Text("${calculateReadingTime(blog.content)} min"),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text("${calculateReadingTime(blog.content)} min"),
+            ),
           ],
         ),
       ),
